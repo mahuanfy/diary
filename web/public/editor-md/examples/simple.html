@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Simple example - Editor.md examples</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="../css/editormd.css" />
+</head>
+
+<body>
+  <div id="layout">
+    <div id="test-editormd">
+      <textarea id="markdown-textarea" style="display:none;"></textarea>
+    </div>
+    <div id="test-editormd-view">
+      <textarea id="markdown-preview" style="display:none;" name="test-editormd-markdown-doc">###Hello world!</textarea>
+    </div>
+  </div>
+  <script src="js/jquery.min.js"></script>
+  <script src="../lib/marked.min.js"></script>
+  <script src="../lib/prettify.min.js"></script>
+
+  <script src="../lib/raphael.min.js"></script>
+  <script src="../lib/underscore.min.js"></script>
+  <script src="../lib/sequence-diagram.min.js"></script>
+  <script src="../lib/flowchart.min.js"></script>
+  <script src="../lib/jquery.flowchart.min.js"></script>
+
+  <script src="../editormd.js"></script>
+  <script type="text/javascript">
+    var uuid, testEditormdView
+
+    function sendMessageToParent(message) {
+      window.parent.window.postMessage(Object.assign({}, message, {
+        uuid
+      }), '*')
+    }
+
+    function initMarkDown(data) {
+      uuid = data.uuid
+      const { preview, height } = data.options
+      if (data.options.preview) {
+        testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+          markdown: data.value,//+ "\r\n" + $("#append-test").text(),
+          htmlDecode: "style,script,iframe",  // you can filter tags decode
+          tocm: true,    // Using [TOCM]
+          emoji: true,
+          taskList: true
+        });
+
+        sendMessageToParent({
+          type: 'height',
+          value: $('#test-editormd-view').height()
+        })
+
+      } else {
+        var testEditor = editormd('test-editormd', {
+          width: '100%',
+          height,
+          syncScrolling: 'single',
+          path: '../lib/',
+          onchange: function () {
+            sendMessageToParent({
+              type: 'markDown',
+              value: this.getMarkdown()
+            })
+          }
+        })
+
+
+        $('#markdown-textarea').val(data.value)
+      }
+
+    }
+
+    function updateValue(data) {
+      console.log(data.value)
+      testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+        markdown: data.value,//+ "\r\n" + $("#append-test").text(),
+        htmlDecode: "style,script,iframe"
+      });
+
+      sendMessageToParent({
+        type: 'height',
+        value: $('#test-editormd-view').height()
+      })
+
+    }
+
+    $(function () {
+      window.addEventListener('message', (message) => {
+        switch (message.data.type) {
+          case 'init': {
+            initMarkDown(message.data);
+            break
+          }
+
+          case 'value': {
+            updateValue(message.data);
+            break
+          }
+
+          default: {
+            console.log(message)
+          }
+        }
+      }, false)
+    })
+
+  </script>
+</body>
+
+</html>
