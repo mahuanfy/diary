@@ -27,5 +27,8 @@ dependencies {
     compile("mysql:mysql-connector-java")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '1.4.3.RELEASE'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.0'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.0'
     testCompile("junit:junit")
 }
