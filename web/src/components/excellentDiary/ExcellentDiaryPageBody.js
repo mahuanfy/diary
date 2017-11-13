@@ -14,7 +14,7 @@ export default class ExcellentDiaryPageBody extends React.Component {
         this.setState({isComment: true})
     };
 
-    cancleComment() {
+    cancelComment() {
         this.setState({isComment: false})
     }
 
@@ -56,7 +56,7 @@ export default class ExcellentDiaryPageBody extends React.Component {
                         </Col>
                     </Row>
 
-                    {this.state.isComment ? <Comment cancleComment={this.cancleComment.bind(this)}/> : ''}
+                    {this.state.isComment ? <Comment cancelComment={this.cancelComment.bind(this)}/> : ''}
                     {com}
 
                 </Card>

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import MyDiaryPageBody from '../components/Diary/MyDiaryPageBody';
+import MyDiaryPageBody from '../components/diary/MyDiaryPageBody';
 import actions from '../actions/diary';
 
 const mapStateToProps = (state) => {

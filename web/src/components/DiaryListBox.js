@@ -14,9 +14,10 @@ export default class DiaryListBox extends React.Component {
         this.state = {
             editable: false,
             isComment: false,
-            time: '2017-11-02   ',
+            time: '2017-11-02',
             input: '',
-            title: ''
+            title: '',
+            editId: 0
         }
     }
 
@@ -24,8 +25,8 @@ export default class DiaryListBox extends React.Component {
         message.success("delete successful");
     };
 
-    editDiary(time, content) {
-        this.setState({title: '修改成长日志', editable: true, time: time, input: content});
+    editDiary(id, time, content) {
+        this.setState({title: '修改成长日志', editable: true, editId: id, time: time, input: content});
     }
 
     cancelEdit() {
@@ -40,7 +41,7 @@ export default class DiaryListBox extends React.Component {
         this.setState({isComment: true})
     }
 
-    cancleComment() {
+    cancelComment() {
         this.setState({isComment: false})
     }
 
@@ -50,39 +51,41 @@ export default class DiaryListBox extends React.Component {
             "time": 1,
             "content": 'assssss'
         }];
+
+
         const diarys = Diary.map((ele, index) => {
             return (
+
                 <div key={index} style={{marginTop: 20}}>
-                    <Card title={ele.time + "的日志"}
-                          extra={<Popconfirm title="Are you sure？" okText="Yes" cancelText="No"
-                                             onConfirm={this.confirm}><a
-                              href="#"> X </a></Popconfirm>}>
-                        <p>{ele.content}</p>
-                        <Row>
-                            <Col offset={18}>
-                                <Button size={'small'} type="primary" style={{marginRight: "10px"}}
-                                        onClick={this.editDiary.bind(this, ele.time, ele.content)}>修改日志</Button>
-                                <Button size={'small'} onClick={this.commentDiary.bind(this)}>评论日志</Button>
-                            </Col>
-                        </Row>
-                        {
-                            this.state.isComment ? <Comment cancleComment={this.cancelEdit.bind(this)}/> : ''
-                        }
-                    </Card>
+                    {
+                        this.state.editable && (this.state.editId === ele.id) ?
+                            <NewDiaryBox title={this.state.title} time={this.state.time} input={this.state.input}
+                                         modifyDiary={this.modifyDiary.bind(this, 1)}
+                                         cancelEdit={this.cancelEdit.bind(this)}/>
+                            :
+                            <Card title={ele.time + "的日志"}
+                                  extra={<Popconfirm title="Are you sure？" okText="Yes" cancelText="No"
+                                                     onConfirm={this.confirm}><a
+                                      href="#"> X </a></Popconfirm>}>
+                                <p>{ele.content}</p>
+                                <Row>
+                                    <Col offset={18}>
+                                        <Button size={'small'} type="primary" style={{marginRight: "10px"}}
+                                                onClick={this.editDiary.bind(this, ele.id, ele.time, ele.content)}>修改日志</Button>
+                                        <Button size={'small'} onClick={this.commentDiary.bind(this)}>评论日志</Button>
+                                    </Col>
+                                </Row>
+                                {
+                                    this.state.isComment ? <Comment cancelComment={this.cancelComment.bind(this)}/> : ''
+                                }
+                            </Card>
+                    }
                 </div>)
         });
 
-        const editDiary = () => {
-            return <div>
-                <NewDiaryBox title={this.state.title} time={this.state.time} input={this.state.input}
-                             modifyDiary={this.modifyDiary.bind(this)} cancleEdit={this.cancleEdit.bind(this)}/>
-            </div>
-        };
-        return <div style={{marginTop: 20}}>
-            {
-                this.state.editable ? editDiary() : diarys
 
-            }
+        return <div style={{marginTop: 20}}>
+            {diarys}
         </div>
     }
 };
