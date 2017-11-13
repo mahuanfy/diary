@@ -1,4 +1,4 @@
-import request from '../request/diary';
+import request from '../request/request';
 
 const allDiary = (content)=>{
     return{

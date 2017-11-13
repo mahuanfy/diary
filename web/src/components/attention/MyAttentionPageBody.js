@@ -14,9 +14,9 @@ export default class MyAttentionPageBody extends React.Component {
         super();
         this.state = {
             users: [{id: 1, name: "aaa"}, {id: 2, name: "qeqe"}, {id: 3, name: "aaaasd"}],
-            followers: [{userId: 2, name: "qeqe"}, {userId: 3, name: "aaaasd", followerId: 8}],
+            followers: [{userId: 2, name: "qeqe",followerId:8}, {userId: 3, name: "aaaasd", followerId: 8}],
             dataSource: [],
-            user: {id: 8, name: "aaa"}
+
         };
 
     }
@@ -29,24 +29,25 @@ export default class MyAttentionPageBody extends React.Component {
         return Math.floor(Math.random() * (max - min + 1)) + min; // eslint-disable-line no-mixed-operators
     }
 
+    followOrCancel(id,oper){
+
+    }
     searchResult(query) {
         let users = this.state.users.filter(user => user.name.includes(query));
-        let find = this.state.followers.find(follower => follower.followerId === this.state.user.id);
-        console.log(find);
         return users
-            .map((item, idx) => ({
-                name: item.name,
+            .map((user, idx) => ({
+                name: user.name,
                 category: `${query}${idx}`,
-                operation: this.state.followers.find(follower => follower.followerId === this.state.user.id)
-                    ? "cancel follower"
-                    : "follower"
+                operation: this.state.followers.find(follower => follower.userId === user.id)
+                    ? <a style={{float:"right"}} onclick={this.followOrCancel.bind(this,user.id,'cancel')}>取消关注</a>
+                    : <a style={{float:"right"}} onclick={this.followOrCancel.bind(this,user.id,'follow')}>关注</a>
             }));
     }
 
     renderOption(item) {
         return (
             <Option key={item.category} text={item.category}>
-                {item.name} <a>{item.operation}</a>
+                {item.name}{item.operation}
             </Option>
         );
     }

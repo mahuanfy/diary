@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, Icon, Button, Row, Col, DatePicker, Input, Popconfirm, message} from 'antd';
 import NewDiaryBox from "./NewDiaryBox";
 import NewDiaryInput from "./NewDiaryInput";
-import Comment from './Comment';
+import Comment from './CommentInput';
 import moment from 'moment';
 
 const {TextArea} = Input;

@@ -16,7 +16,7 @@ export default class UserInfo extends React.Component {
         return <div>
             <Dropdown overlay={menu}>
                 <Button>
-                    admin <Icon type="down"/>
+                    {this.props.user.name}<Icon type="down"/>
                 </Button>
             </Dropdown>
         </div>
