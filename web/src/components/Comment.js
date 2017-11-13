@@ -12,7 +12,7 @@ export default class Comment extends React.Component {
                 <Col offset={4}>
 
                     <Button type="primary" size={'small'} style={{marginRight: 10, marginTop: 10}}>提交</Button>
-                    <Button size={'small'} onClick={this.props.cancleComment}>取消</Button>
+                    <Button size={'small'} onClick={this.props.cancelComment}>取消</Button>
                 </Col>
             </Row>
         </div>

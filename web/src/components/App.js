@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import UserInfo from './Diary/UserInfo';
-import MyDiaryPageBody from './Diary/MyDiaryPageBody';
-import ExcellentDiaryPageBody from './ExcellentDiary/ExcellentDiaryPageBody';
-import MyAttentionPageBody from './Attention/MyAttentionPageBody';
+import UserInfo from './diary/UserInfo';
+import MyDiaryPageBody from './diary/MyDiaryPageBody';
+import ExcellentDiaryPageBody from './excellentDiary/ExcellentDiaryPageBody';
+import MyAttentionPageBody from './attention/MyAttentionPageBody';
 
 import '../css/App.css'
 import logo from '../images/logo.png'
