@@ -59,7 +59,9 @@ export default class DiaryListBox extends React.Component {
                 <div key={index} style={{marginTop: 20}}>
                     {
                         this.state.editable && (this.state.editId === ele.id) ?
-                            <NewDiaryBox title={this.state.title} time={this.state.time} input={this.state.input}
+                            <NewDiaryBox title={this.state.title}
+                                         time={this.state.time}
+                                         input={this.state.input}
                                          modifyDiary={this.modifyDiary.bind(this, 1)}
                                          cancelEdit={this.cancelEdit.bind(this)}/>
                             :
