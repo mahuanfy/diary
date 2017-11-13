@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
-import {Layout, Menu, Breadcrumb, Icon, Row, Col} from 'antd';
-import UserInfo from './UserInfo';
-import MyDiaryPageBody from './MyDiaryPageBody';
+import UserInfo from './Diary/UserInfo';
+import MyDiaryPageBody from './Diary/MyDiaryPageBody';
+import ExcellentDiaryPageBody from './ExcellentDiary/ExcellentDiaryPageBody';
+import MyAttentionPageBody from './Attention/MyAttentionPageBody';
+
 import '../css/App.css'
 import logo from '../images/logo.png'
+import {Layout, Menu, Breadcrumb, Icon, Row, Col, Tabs, message} from 'antd';
 
 const {SubMenu} = Menu;
 const {Header, Content, Footer, Sider} = Layout;
+const {TabPane} = Tabs;
 
 class App extends Component {
     render() {
@@ -25,28 +29,15 @@ class App extends Component {
                         <Breadcrumb.Item>App</Breadcrumb.Item>
                     </Breadcrumb>
                     <Layout style={{padding: '24px 0', background: '#fff'}}>
-                        <Sider width={200} style={{background: '#fff'}}>
-                            <Menu
-                                mode="inline"
-                                defaultSelectedKeys={['1']}
-                                style={{height: '100%'}}
-                            >
-                                <Menu.Item key="1">
-                                    <Icon type="edit"/>
-                                    <span>我的日志</span>
-                                </Menu.Item>
-                                <Menu.Item key="2">
-                                    <Icon type="team"/>
-                                    <span>我的关注</span>
-                                </Menu.Item>
-                                <Menu.Item key="3">
-                                    <Icon type="like-o"/>
-                                    <span>优秀日志</span>
-                                </Menu.Item>
-                            </Menu>
-                        </Sider>
                         <Content style={{padding: '0 24px', minHeight: 280}}>
-                            <MyDiaryPageBody/>
+                            <Tabs tabPosition={'left'} defaultActiveKey="1">
+                                <TabPane tab={<span><Icon type="edit"/> 我的日志</span>}
+                                         key="1"><MyDiaryPageBody/></TabPane>
+                                <TabPane tab={<span><Icon type="team"/> 我的关注</span>}
+                                         key="2"><MyAttentionPageBody/></TabPane>
+                                <TabPane tab={<span><Icon type="like-o"/> 优秀日志</span>}
+                                         key="3"><ExcellentDiaryPageBody/></TabPane>
+                            </Tabs>
                         </Content>
                     </Layout>
                 </Content>

@@ -1,20 +1,20 @@
 import React from 'react'
-import {Col,Row,Input,DatePicker} from 'antd';
-const { TextArea } = Input;
+import {Col, Row, Input, DatePicker} from 'antd';
+import moment from 'moment';
+const {TextArea} = Input;
 
-export default class NewDiaryInput extends React.Component{
+export default class NewDiaryInput extends React.Component {
 
-    render(){
-        return<div>
-            <Row >
-                <Col span={20} offset={1}>
-                    日期  <DatePicker/>
-                </Col>
+    render() {
+        return <div>
+            <Row>
+                <Col span={2}>日期： </Col>
+                <DatePicker defaultValue={moment(this.props.time)}/>
             </Row>
-            <Row style={{margin:"10px 0"}}>
-                <Col span={2} >总结内容 </Col>
+            <Row style={{margin: "10px 0"}}>
+                <Col span={2}>总结内容：  </Col>
                 <Col span={22}>
-                    <TextArea autosize={{ minRows: 2, maxRows: 6 }} />
+                    <TextArea value={this.props.input} style={{width: 1000}} autosize={{minRows: 4, maxRows: 6}}/>
                 </Col>
             </Row>
         </div>
