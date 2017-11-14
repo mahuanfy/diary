@@ -1,9 +1,10 @@
 import React from 'react';
 import {Card, Icon, Button, Row, Col, DatePicker, Input, Popconfirm, message} from 'antd';
 import NewDiaryBox from "./NewDiaryBox";
-import NewDiaryInput from "./NewDiaryInput";
 import Comment from './CommentInput';
 import moment from 'moment';
+import {connect} from 'react-redux';
+import * as diaryActions from '../actions/diary';
 
 const {TextArea} = Input;
 const dateFormat = 'YYYY-MM-DD';
@@ -21,9 +22,6 @@ export default class DiaryListBox extends React.Component {
         }
     }
 
-    confirm() {
-        message.success("delete successful");
-    };
 
     editDiary(id, time, content) {
         this.setState({title: '修改成长日志', editable: true, editId: id, time: time, input: content});
@@ -44,16 +42,9 @@ export default class DiaryListBox extends React.Component {
     cancelComment() {
         this.setState({isComment: false})
     }
-
     render() {
-        const Diary = [{"id": 1, "time": '2017-11-02', "content": 'assssss'}, {
-            "id": 2,
-            "time": 1,
-            "content": 'assssss'
-        }];
 
-
-        const diarys = Diary.map((ele, index) => {
+        const diaries = this.props.diaries.map((ele, index) => {
             return (
 
                 <div key={index} style={{marginTop: 20}}>
@@ -62,12 +53,12 @@ export default class DiaryListBox extends React.Component {
                             <NewDiaryBox title={this.state.title}
                                          time={this.state.time}
                                          input={this.state.input}
-                                         modifyDiary={this.modifyDiary.bind(this, 1)}
+                                         modifyDiary={this.modifyDiary.bind(this, ele.id)}
                                          cancelEdit={this.cancelEdit.bind(this)}/>
                             :
-                            <Card title={ele.time + "的日志"}
+                            <Card title={moment(ele.time).format(dateFormat) + "的日志"}
                                   extra={<Popconfirm title="Are you sure？" okText="Yes" cancelText="No"
-                                                     onConfirm={this.confirm}><a
+                                                     onConfirm={this.props.deleteDiary.bind(this,ele)}><a
                                       href="#"> X </a></Popconfirm>}>
                                 <p>{ele.content}</p>
                                 <Row>
@@ -87,7 +78,7 @@ export default class DiaryListBox extends React.Component {
 
 
         return <div style={{marginTop: 20}}>
-            {diarys}
+            {diaries}
         </div>
     }
 };

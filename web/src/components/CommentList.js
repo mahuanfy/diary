@@ -1,7 +1,7 @@
 import React from 'react';
 import {Input, Button, Row, Col,Collapse} from 'antd';
 const Panel = Collapse.Panel;
-export default class Comment extends React.Component {
+export default class CommentList extends React.Component {
     render() {
         const comments = [{"id": 1, diaryId:1,"opteror": "张", "comment": "完成的不错哈~不过可以更细致，可以抓紧时间动起来把功能完善了~"}];
 

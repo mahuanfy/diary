@@ -21,7 +21,7 @@ export default class NewDiaryBox extends React.Component {
         this.setState({time})
     }
     submitDiary(){
-        // this.props.addDiary({...this.state,})
+        this.props.submitDiary({...this.state});
     }
     render() {
         return <div>

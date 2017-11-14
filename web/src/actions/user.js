@@ -1,17 +1,18 @@
 import * as request from '../request/request'
-import * as STATUS from '../constants/StatusCode';
+import * as StatusCode from '../constants/StatusCode';
+import * as  userActions from './diary';
 
-const login = (user)=>{
-  return{
-      type:"LOGIN",
-      user
-  }
+const login = (user) => {
+    return {
+        type: "LOGIN",
+        user
+    }
 };
 export const getUser = (student) => {
     return dispatch => {
-        request.get('/api/user?name=xueyuan&&password=123456', student)
+        request.get(`/api/user?name=${student.name}&&password=${student.password}`)
             .then(result => {
-                if (result.status === STATUS.OK) {
+                if (result.status === StatusCode.OK) {
                     dispatch(login(result.data))
                 }
             });
