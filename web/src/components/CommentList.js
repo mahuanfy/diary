@@ -5,7 +5,6 @@ const Panel = Collapse.Panel;
 export default class CommentList extends React.Component {
     render() {
         const comments = this.props.comments;
-
         const commentList = comments.map((comment, index) => {
             return <p key={index}>{comment.user.name + ":" + comment.comment}</p>
         })

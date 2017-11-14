@@ -15,6 +15,7 @@ const {TabPane} = Tabs;
 class App extends Component {
     componentWillMount() {
         this.props.login(student);
+        this.props.getAllUser();
     }
 
     render() {
@@ -63,13 +64,16 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.Login,
+        user: state.Login.login,
     }
 };
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (student) => {
             dispatch(actions.getUser(student))
+        },
+        getAllUser:()=>{
+          dispatch(actions.getAllUser())
         }
     }
 };

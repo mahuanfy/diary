@@ -53,7 +53,7 @@ class MyDiaryPageBody extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.Login,
+        user: state.Login.login,
         diaries: state.Diary
     }
 }

@@ -12,10 +12,17 @@ public class ExcellentDiary {
     private long id;
     private long operatorId;
     private Date time;
-    @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "excellentDiaryId")
-    private List<Comment> comments;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "diaryId")
+    private Diary diary;
 
+    public Diary getDiary() {
+        return diary;
+    }
+
+    public void setDiary(Diary diary) {
+        this.diary = diary;
+    }
 
     public long getId() {
         return id;
@@ -25,13 +32,6 @@ public class ExcellentDiary {
         this.id = id;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
 
     public long getOperatorId() {
         return operatorId;

@@ -3,13 +3,21 @@ import React from 'react';
 import {Card, Button, Row, Col, Collapse} from 'antd';
 import Comment from '../CommentInput';
 import CommentList from '../CommentList';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import * as excellentActions from '../../actions/excellent';
+import moment from 'moment';
 
 const Panel = Collapse.Panel;
 
-export default class ExcellentDiaryPageBody extends React.Component {
+class ExcellentDiaryPageBody extends React.Component {
     constructor(props) {
         super(props);
         this.state = {isComment: false}
+    }
+
+    componentWillMount() {
+        this.props.getExcellentDiary();
     }
 
     comment = () => {
@@ -21,23 +29,26 @@ export default class ExcellentDiaryPageBody extends React.Component {
     }
 
     cancelRecommendOrRecommend(id, oper) {
-
+        oper === "cancel" ?
+            this.props.deleteExcellent(id) :
+            "";
     }
 
     render() {
-
-        const excellentDiary = [{"id": 1, "name": 'hhh', "content": 111111}];
-        const excellent = excellentDiary.map((ele, index) => {
+        const users = this.props.users;
+        const excellent = this.props.excellentDiaries.map((ele, index) => {
+            let name = users.find(user => user.id === ele.diary.userId).name;
             let recommend = this.props.isRecommend ?
                 <Button type="primary" size={'small'} ghost
-                        onClick={this.cancelRecommendOrRecommend.bind(this, ele.id, "cancel")}>取消为优秀日志</Button>
+                        onClick={this.cancelRecommendOrRecommend.bind(this, ele.id, "recommend")}>推荐优秀日志</Button>
                 :
                 <Button type="primary" size={'small'} ghost
-                        onClick={this.cancelRecommendOrRecommend.bind(this, ele.id, "recommend")}>推荐优秀日志</Button>;
+                        onClick={this.cancelRecommendOrRecommend.bind(this, ele.id, "cancel")}>取消为优秀日志</Button>;
+
 
             return <div key={index} style={{marginTop: 20}}>
-                <Card title={ele.name + ' 的日志'} extra={ele.time}>
-                    <p>{ele.content}</p>
+                <Card title={name + ' 的日志'} extra={moment(ele.diary.time).format("YYYY-MM-DD")}>
+                    <p>{ele.diary.content}</p>
                     <Row>
                         <Col span={3}>查看全文</Col>
                         <Col offset={16} style={{marginTop: 20}}>
@@ -48,9 +59,11 @@ export default class ExcellentDiaryPageBody extends React.Component {
                     </Row>
 
                     {this.state.isComment ?
-                        <Comment status='input' cancelComment={this.cancelComment.bind(this)}/> : ''}
-                    <CommentList diaryId={ele.id}/>
-
+                        <Comment diary={ele.diary} comment={this.props.comment} status='input'
+                                 cancelComment={this.cancelComment.bind(this)}/> : ''}
+                    {ele.diary.commentList.length > 0 ?
+                        < CommentList comments={ele.diary.commentList} diaryId={ele.id}/> : ""
+                    }
                 </Card>
             </div>
         });
@@ -60,3 +73,26 @@ export default class ExcellentDiaryPageBody extends React.Component {
         </div>
     }
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        users: state.Login.users,
+        excellentDiaries: state.ExcellentDiary
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getExcellentDiary: () => {
+            dispatch(excellentActions.getAllExcellent())
+        },
+        comment: (comment) => {
+            dispatch(excellentActions.commentDiary(comment))
+        },
+        deleteExcellent:(id)=>{
+            dispatch(excellentActions.deleteDiary(id))
+        }
+    }
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ExcellentDiaryPageBody))

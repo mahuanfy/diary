@@ -1,7 +1,11 @@
-export default (state={},action)=>{
+export default (state={"login":{},"users":[]},action)=>{
     switch (action.type){
         case "LOGIN":
-            return action.user;
+            state.login = action.user;
+            return Object.assign({},state);
+        case "GET_ALL_USER":
+            state.users = action.users;
+            return Object.assign({},state);
     }
     return state;
 }
