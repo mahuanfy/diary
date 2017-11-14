@@ -3,8 +3,7 @@ import {Card, Icon, Button, Row, Col, DatePicker, Input, Popconfirm, message} fr
 import NewDiaryBox from "./NewDiaryBox";
 import Comment from './CommentInput';
 import moment from 'moment';
-import {connect} from 'react-redux';
-import * as diaryActions from '../actions/diary';
+import CommentList from './CommentList';
 
 const {TextArea} = Input;
 const dateFormat = 'YYYY-MM-DD';
@@ -76,6 +75,7 @@ export default class DiaryListBox extends React.Component {
                                         <Comment diary={ele} comment={this.props.comment}
                                                  cancelComment={this.cancelComment.bind(this)}/> : ''
                                 }
+                                {ele.commentList.length > 0 ? <CommentList comments={ele.commentList}/> : ""}
                             </Card>
                     }
                 </div>)

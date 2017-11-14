@@ -58,7 +58,7 @@ export const commentDiary = (comment) => {
         request.post(`/api/comment`,comment)
             .then(result => {
                 if (result.status === StatusCode.OK) {
-                    dispatch(getAllDiary(comment.userId));
+                    dispatch(getAllDiary(comment.user.id));
                 }
             });
     }
