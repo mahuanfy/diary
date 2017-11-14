@@ -29,17 +29,26 @@ public class DiaryController {
 
     @DeleteMapping("/diary/{diaryId}")
     public ResponseEntity deleteById(@PathVariable("diaryId") long diaryId) {
-        try {
-            if (diaryRepository.findOne(diaryId) != null) {
-                diaryRepository.delete(diaryId);
+        if (diaryRepository.findOne(diaryId) != null) {
+            diaryRepository.delete(diaryId);
 
-                return new ResponseEntity<>(diaryId, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(diaryId, HttpStatus.NO_CONTENT);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            return new ResponseEntity<>(diaryId, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(diaryId, HttpStatus.NO_CONTENT);
         }
-        return null;
+
+    }
+
+    @PutMapping("/diary")
+    public ResponseEntity modify(@RequestBody Diary diary) {
+        Diary oldDiary = diaryRepository.findOne(diary.getId());
+        if (oldDiary != null) {
+            oldDiary.setContent(diary.getContent());
+            oldDiary.setTime(diary.getTime());
+
+            diary = diaryRepository.save(oldDiary);
+            return new ResponseEntity<>(diary, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(diary, HttpStatus.NO_CONTENT);
     }
 }

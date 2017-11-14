@@ -31,10 +31,6 @@ export default class DiaryListBox extends React.Component {
         this.setState({editable: false});
     }
 
-    modifyDiary(id) {
-        this.props.modifyDiary();
-    }
-
     commentDiary() {
         this.setState({isComment: true})
     }
@@ -53,7 +49,11 @@ export default class DiaryListBox extends React.Component {
                             <NewDiaryBox title={this.state.title}
                                          time={this.state.time}
                                          input={this.state.input}
-                                         modifyDiary={this.modifyDiary.bind(this, ele.id)}
+                                         id={ele.id}
+                                         userId={ele.userId}
+                                         status="edit"
+                                         modifyDiary={this.props.modifyDiary}
+                                         submitDiary={this.props.submitDiary}
                                          cancelEdit={this.cancelEdit.bind(this)}/>
                             :
                             <Card title={moment(ele.time).format(dateFormat) + "的日志"}

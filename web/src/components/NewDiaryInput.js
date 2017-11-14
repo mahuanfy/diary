@@ -5,11 +5,6 @@ import moment from 'moment';
 const {TextArea} = Input;
 
 export default class NewDiaryInput extends React.Component {
-
-    onChange(date, dateString) {
-
-    }
-
     render() {
         return <div>
             <Row>

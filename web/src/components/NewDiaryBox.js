@@ -8,8 +8,12 @@ export default class NewDiaryBox extends React.Component {
     constructor(props) {
         super(props);
         const time = props.time;
+        const id = props.id;
+        const userId = props.userId;
         this.state = {
+            id,
             time,
+            userId,
             content: props.input
         };
     }
@@ -17,13 +21,19 @@ export default class NewDiaryBox extends React.Component {
     updateContent(content) {
         this.setState({content})
     }
+
     updateTime(time) {
         this.setState({time})
     }
-    submitDiary(){
-        this.props.submitDiary({...this.state});
+
+    modify() {
+        this.props.modifyDiary({...this.state});
+        this.props.cancelEdit();
     }
+
     render() {
+        const diary = {...this.state}
+
         return <div>
             <Card title={this.props.title}>
                 <NewDiaryInput updateContent={this.updateContent.bind(this)}
@@ -32,7 +42,10 @@ export default class NewDiaryBox extends React.Component {
                 <Row>
                     <Col offset={18}>
                         <Button type="primary" size={'small'} style={{margin: 15}}
-                                onClick={this.submitDiary.bind(this)}>提交</Button>
+                                onClick={this.props.status === "edit" ?
+                                    this.modify.bind(this)
+                                    :
+                                    this.props.submitDiary.bind(this, diary)}>提交</Button>
                         <Button size={'small'} onClick={this.props.cancelEdit}>取消</Button>
                     </Col>
                 </Row>

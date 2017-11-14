@@ -30,9 +30,20 @@ export const addDiary = (diary) => {
 }
 
 export const deleteDiary = (diary) => {
-    console.log(diary)
     return dispatch => {
         request._delete(`/api/diary/${diary.id}`)
+            .then(result => {
+                if (result.status === StatusCode.OK) {
+                    dispatch(getAllDiary(diary.userId));
+                }
+            });
+    }
+}
+
+
+export const modifyDiary = (diary) => {
+    return dispatch => {
+        request.put(`/api/diary`,diary)
             .then(result => {
                 if (result.status === StatusCode.OK) {
                     dispatch(getAllDiary(diary.userId));

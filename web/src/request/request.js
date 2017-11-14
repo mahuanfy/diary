@@ -54,3 +54,23 @@ export const _delete = (url) => {
     });
 };
 
+
+export const put = (url,data) => {
+    return fetch(url, {
+        method: "PUT",
+        headers: new Headers({
+                'Accept': 'application/json;charset=utf-8',
+                'Content-Type': 'application/json'
+            }
+        ),
+        body:JSON.stringify(data)
+    }).then(response => {
+        status = response.status;
+        return response ? response.json() : "";
+    }).then(json => {
+        return {data: json, status}
+    }).catch((err) => {
+        return err;
+    });
+};
+

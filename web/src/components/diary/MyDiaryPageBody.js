@@ -38,10 +38,14 @@ class MyDiaryPageBody extends React.Component {
             <NewDiaryBox title={this.state.title}
                          time={this.state.time}
                          input={this.state.input}
+                         status="add"
+                         modifyDiary={this.props.modifyDiary}
                          cancelEdit={this.cancelEdit.bind(this)}
                          submitDiary={this.submitDiary.bind(this)}/>
 
-            <DiaryListBox diaries={diaries} deleteDiary={this.props.deleteDiary}/>
+            <DiaryListBox diaries={diaries}
+                          modifyDiary={this.props.modifyDiary}
+                          deleteDiary={this.props.deleteDiary}/>
         </div>
     }
 }
@@ -64,6 +68,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         deleteDiary: (diary) => {
             dispatch(diaryActions.deleteDiary(diary));
+        },
+        modifyDiary: (diary) => {
+            dispatch(diaryActions.modifyDiary(diary));
         }
     };
 }
