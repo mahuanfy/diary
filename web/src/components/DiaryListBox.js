@@ -18,7 +18,8 @@ export default class DiaryListBox extends React.Component {
             time: '2017-11-02',
             input: '',
             title: '',
-            editId: 0
+            editId: 0,
+            commentId: 0
         }
     }
 
@@ -31,13 +32,14 @@ export default class DiaryListBox extends React.Component {
         this.setState({editable: false});
     }
 
-    commentDiary() {
-        this.setState({isComment: true})
+    commentDiary(id) {
+        this.setState({isComment: true, commentId: id})
     }
 
     cancelComment() {
         this.setState({isComment: false})
     }
+
     render() {
 
         const diaries = this.props.diaries.map((ele, index) => {
@@ -58,18 +60,21 @@ export default class DiaryListBox extends React.Component {
                             :
                             <Card title={moment(ele.time).format(dateFormat) + "的日志"}
                                   extra={<Popconfirm title="Are you sure？" okText="Yes" cancelText="No"
-                                                     onConfirm={this.props.deleteDiary.bind(this,ele)}><a
+                                                     onConfirm={this.props.deleteDiary.bind(this, ele)}><a
                                       href="#"> X </a></Popconfirm>}>
                                 <p>{ele.content}</p>
                                 <Row>
                                     <Col offset={18}>
                                         <Button size={'small'} type="primary" style={{marginRight: "10px"}}
                                                 onClick={this.editDiary.bind(this, ele.id, ele.time, ele.content)}>修改日志</Button>
-                                        <Button size={'small'} onClick={this.commentDiary.bind(this)}>评论日志</Button>
+                                        <Button size={'small'}
+                                                onClick={this.commentDiary.bind(this, ele.id)}>评论日志</Button>
                                     </Col>
                                 </Row>
                                 {
-                                    this.state.isComment ? <Comment cancelComment={this.cancelComment.bind(this)}/> : ''
+                                    this.state.isComment && (this.state.commentId === ele.id) ?
+                                        <Comment diary={ele} comment={this.props.comment}
+                                                 cancelComment={this.cancelComment.bind(this)}/> : ''
                                 }
                             </Card>
                     }

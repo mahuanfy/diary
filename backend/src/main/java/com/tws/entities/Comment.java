@@ -11,10 +11,18 @@ public class Comment {
     private long id;
     private String comment;
     private Date commentTime;
-
+    private long diaryId;
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "userId")
     private User user;
+
+    public long getDiaryId() {
+        return diaryId;
+    }
+
+    public void setDiaryId(long diaryId) {
+        this.diaryId = diaryId;
+    }
 
     public long getId() {
         return id;

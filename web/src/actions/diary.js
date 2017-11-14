@@ -52,3 +52,14 @@ export const modifyDiary = (diary) => {
     }
 }
 
+export const commentDiary = (comment) => {
+
+    return dispatch => {
+        request.post(`/api/comment`,comment)
+            .then(result => {
+                if (result.status === StatusCode.OK) {
+                    dispatch(getAllDiary(comment.userId));
+                }
+            });
+    }
+}

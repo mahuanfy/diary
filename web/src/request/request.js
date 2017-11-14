@@ -31,6 +31,7 @@ export const post = (url, data) => {
     }).then(json => {
         return {data: json, status}
     }).catch((err) => {
+        console.log(err)
         return err;
     });
 };

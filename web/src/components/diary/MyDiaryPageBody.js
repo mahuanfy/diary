@@ -45,7 +45,8 @@ class MyDiaryPageBody extends React.Component {
 
             <DiaryListBox diaries={diaries}
                           modifyDiary={this.props.modifyDiary}
-                          deleteDiary={this.props.deleteDiary}/>
+                          deleteDiary={this.props.deleteDiary}
+                          comment={this.props.comment}/>
         </div>
     }
 }
@@ -71,6 +72,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         modifyDiary: (diary) => {
             dispatch(diaryActions.modifyDiary(diary));
+        },
+        comment:(comment)=>{
+            dispatch(diaryActions.commentDiary(comment))
         }
     };
 }
