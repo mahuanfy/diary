@@ -18,7 +18,6 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-
     @ApiOperation("用户登录")
     @GetMapping("/user")
     public ResponseEntity<?> login(String name,String password) {
@@ -29,4 +28,5 @@ public class UserController {
 
         return new ResponseEntity<>(user, HttpStatus.NO_CONTENT);
     }
+
 }

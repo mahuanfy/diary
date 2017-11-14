@@ -1,22 +1,21 @@
 package com.tws.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "t_comment")
 public class Comment {
+    @Id
+    @GeneratedValue
     private long id;
     private String comment;
     private Date commentTime;
-    private long userId;
-    private long diaryId;
 
-    @Id
-    @GeneratedValue
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "userId")
+    private User user;
+
     public long getId() {
         return id;
     }
@@ -41,19 +40,11 @@ public class Comment {
         this.commentTime = commentTime;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public long getDiaryId() {
-        return diaryId;
-    }
-
-    public void setDiaryId(long diaryId) {
-        this.diaryId = diaryId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

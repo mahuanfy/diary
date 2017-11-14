@@ -1,21 +1,22 @@
 package com.tws.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "t_excellent_diary")
 public class ExcellentDiary {
-    private long id;
-    private long diaryId;
-    private long operatorId;
-    private Date time;
-
     @Id
     @GeneratedValue
+    private long id;
+    private long operatorId;
+    private Date time;
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "excellentDiaryId")
+    private List<Comment> comments;
+
+
     public long getId() {
         return id;
     }
@@ -24,12 +25,12 @@ public class ExcellentDiary {
         this.id = id;
     }
 
-    public long getDiaryId() {
-        return diaryId;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setDiaryId(long diaryId) {
-        this.diaryId = diaryId;
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public long getOperatorId() {
@@ -47,4 +48,5 @@ public class ExcellentDiary {
     public void setTime(Date time) {
         this.time = time;
     }
+
 }
