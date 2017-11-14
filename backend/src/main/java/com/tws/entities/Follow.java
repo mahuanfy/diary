@@ -1,19 +1,17 @@
 package com.tws.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "t_follow")
 public class Follow {
+    @Id
+    @GeneratedValue
     private long id;
     private long userId;
     private long followerId;
 
-    @Id
-    @GeneratedValue
     public long getId() {
         return id;
     }
