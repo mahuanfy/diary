@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface DiaryRepository extends CrudRepository<Diary,Long> {
     List<Diary> findByUserIdOrderByTimeDesc(Long userId);
+
+    List<Diary> findByUserId(long userId);
 }

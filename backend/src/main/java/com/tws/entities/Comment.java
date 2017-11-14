@@ -12,6 +12,7 @@ public class Comment {
     private String comment;
     private Date commentTime;
     private long diaryId;
+
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "userId")
     private User user;

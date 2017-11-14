@@ -12,6 +12,7 @@ export const get = (url) => {
     }).then(json => {
         return {data: json, status}
     }).catch((err) => {
+        console.log(err)
         return err;
     });
 };

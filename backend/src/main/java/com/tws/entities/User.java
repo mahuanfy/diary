@@ -1,20 +1,20 @@
 package com.tws.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "t_user")
 public class User {
+    @Id
+    @GeneratedValue
     private long id;
     private String name;
     private String password;
     private int roleId;
 
-    @Id
-    @GeneratedValue
     public long getId() {
         return id;
     }

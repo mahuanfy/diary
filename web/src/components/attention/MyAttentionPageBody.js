@@ -86,7 +86,7 @@ class MyAttentionPageBody extends React.Component {
                     </div>
                 </Col>
             </Row>
-            <AttentionList/>
+            <AttentionList followersDiaries={this.props.followersDiaries}/>
         </div>
     }
 }
@@ -95,7 +95,8 @@ const mapStateToProps = (state) => {
     return {
         user: state.Login.login,
         users: state.Login.users,
-        followers: state.Attention
+        followers: state.Attention.followers,
+        followersDiaries: state.Attention.followersDiaries
     }
 };
 
