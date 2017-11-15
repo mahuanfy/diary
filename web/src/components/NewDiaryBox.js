@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, DatePicker, Row, Col, Input, Button} from 'antd';
+import {Card, Row, Col, Button} from 'antd';
 import NewDiaryInput from './NewDiaryInput'
 
 export default class NewDiaryBox extends React.Component {

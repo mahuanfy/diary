@@ -11,7 +11,7 @@ export const allFollowers = (content) => {
 
 export const getAllFollowers = (userId) => {
     return dispatch => {
-        const res = request.get(`/api/followers/${userId}`)
+        request.get(`/api/followers/${userId}`)
             .then(result => {
                 if (result.status === StatusCode.OK) {
                     dispatch(allFollowers(result.data));

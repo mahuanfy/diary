@@ -3,7 +3,6 @@ package com.tws.controllers;
 import com.tws.entities.Diary;
 import com.tws.repositories.CommentRepository;
 import com.tws.repositories.DiaryRepository;
-import com.tws.repositories.UserRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

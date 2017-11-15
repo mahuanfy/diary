@@ -45,7 +45,7 @@ public class ExcellentController {
             excellentDiary.setDiary(diary);
             excellentDiaryRepository.save(excellentDiary);
         }
-        
+
         return new ResponseEntity<>(excellentDiary, HttpStatus.OK);
     }
 

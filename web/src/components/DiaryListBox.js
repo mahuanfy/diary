@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Icon, Button, Row, Col, DatePicker, Input, Popconfirm, message} from 'antd';
+import {Card, Button, Row, Col, Input, Popconfirm} from 'antd';
 import NewDiaryBox from "./NewDiaryBox";
 import Comment from './CommentInput';
 import moment from 'moment';

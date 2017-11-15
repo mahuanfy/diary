@@ -11,7 +11,7 @@ export const allDiary = (content) => {
 
 export const getAllExcellent = () => {
     return dispatch => {
-        const res = request.get('/api/excellentDiaries')
+        request.get('/api/excellentDiaries')
             .then(result => {
                 if (result.status === StatusCode.OK) {
                     dispatch(allDiary(result.data));

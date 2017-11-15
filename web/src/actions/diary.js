@@ -10,7 +10,7 @@ export const allDiary = (content) => {
 
 export const getAllDiary = (userId) => {
     return dispatch => {
-        const res = request.get(`/api/diaries/${userId}`)
+        request.get(`/api/diaries/${userId}`)
             .then(result => {
                 if (result.status === StatusCode.OK) {
                     dispatch(allDiary(result.data));

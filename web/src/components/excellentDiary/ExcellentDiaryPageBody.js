@@ -1,14 +1,12 @@
 import React from 'react';
 
-import {Card, Button, Row, Col, Collapse} from 'antd';
+import {Card, Button, Row, Col} from 'antd';
 import Comment from '../CommentInput';
 import CommentList from '../CommentList';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import * as excellentActions from '../../actions/excellent';
 import moment from 'moment';
-
-const Panel = Collapse.Panel;
 
 class ExcellentDiaryPageBody extends React.Component {
     constructor(props) {

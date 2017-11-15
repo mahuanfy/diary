@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input, Button, Row, Col, Collapse} from 'antd';
+import { Row, Col, Collapse} from 'antd';
 
 const Panel = Collapse.Panel;
 export default class CommentList extends React.Component {
