@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ReactMarkdown from "react-markdown";
 import {Card, Button, Row, Col} from 'antd';
 import Comment from '../CommentInput';
 import CommentList from '../CommentList';
@@ -37,7 +37,7 @@ class ExcellentDiaryPageBody extends React.Component {
 
             return <div key={index} style={{marginTop: 20}}>
                 <Card title={name + ' 的日志'} extra={moment(ele.diary.time).format("YYYY-MM-DD")}>
-                    <p>{ele.diary.content}</p>
+                    <ReactMarkdown source={ele.diary.content} />
                     <Row>
                         <Col offset={16} style={{marginTop: 20}}>
                             <Button style={{marginRight: 10}} type="primary" size={'small'} ghost
@@ -45,7 +45,7 @@ class ExcellentDiaryPageBody extends React.Component {
                             {this.props.user.roleId === 2 ?
                                 <Button type="primary" size={'small'} ghost
                                         onClick={this.cancelRecommend.bind(this, ele.id)}>取消为优秀日志</Button>
-                                :""
+                                : ""
                             }
                         </Col>
                     </Row>

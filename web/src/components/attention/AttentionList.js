@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 
+
 import {Col} from 'antd';
 
 export default class AttentionList extends React.Component {

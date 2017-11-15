@@ -20,7 +20,7 @@ class MyDiaryPageBody extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.getAllDiaries(this.props.user)
     }
 

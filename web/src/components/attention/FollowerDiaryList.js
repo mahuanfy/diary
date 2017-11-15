@@ -7,7 +7,7 @@ import {Card, Button, Row, Col, Collapse} from 'antd';
 import Comment from '../CommentInput';
 import CommentList from '../CommentList';
 import moment from 'moment';
-
+import ReactMarkdown from 'react-markdown';
 class FollowerDiaryList extends React.Component {
     constructor(props) {
         super(props);
@@ -44,7 +44,7 @@ class FollowerDiaryList extends React.Component {
             let name = users.find(user => user.id === ele.userId).name;
             return <div key={index} style={{marginTop: 20}}>
                 <Card title={name + ' 的日志'} extra={moment(ele.time).format("YYYY-MM-DD")}>
-                    <p>{ele.content}</p>
+                    <ReactMarkdown source={ele.content} />
                     <Row>
                         <Col offset={16} style={{marginTop: 20}}>
                             <Button style={{marginRight: 10}} type="primary" size={'small'} ghost

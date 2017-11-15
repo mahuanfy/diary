@@ -4,6 +4,7 @@ import NewDiaryBox from "./NewDiaryBox";
 import Comment from './CommentInput';
 import moment from 'moment';
 import CommentList from './CommentList';
+import ReactMarkdown from 'react-markdown';
 
 const {TextArea} = Input;
 const dateFormat = 'YYYY-MM-DD';
@@ -61,7 +62,7 @@ export default class DiaryListBox extends React.Component {
                                   extra={<Popconfirm title="Are you sure？" okText="Yes" cancelText="No"
                                                      onConfirm={this.props.deleteDiary.bind(this, ele)}><a
                                       href="#"> X </a></Popconfirm>}>
-                                <p>{ele.content}</p>
+                                <ReactMarkdown source={ele.content} />
                                 <Row>
                                     <Col offset={18}>
                                         <Button size={'small'} type="primary" style={{marginRight: "10px"}}
