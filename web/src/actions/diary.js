@@ -22,7 +22,7 @@ export const addDiary = (diary) => {
     return dispatch => {
         request.post("/api/diary", diary)
             .then(result => {
-                if (result.status === StatusCode.OK) {
+                if (result.status === StatusCode.CREATED) {
                     dispatch(getAllDiary(diary.userId));
                 }
             })
@@ -31,9 +31,9 @@ export const addDiary = (diary) => {
 
 export const deleteDiary = (diary) => {
     return dispatch => {
-        request._delete(`/api/diary/${diary.id}`)
+        request.del(`/api/diary/${diary.id}`)
             .then(result => {
-                if (result.status === StatusCode.OK) {
+                if (result.status === StatusCode.NO_CONTENT) {
                     dispatch(getAllDiary(diary.userId));
                 }
             });
@@ -45,7 +45,7 @@ export const modifyDiary = (diary) => {
     return dispatch => {
         request.put(`/api/diary`,diary)
             .then(result => {
-                if (result.status === StatusCode.OK) {
+                if (result.status === StatusCode.CREATED) {
                     dispatch(getAllDiary(diary.userId));
                 }
             });
@@ -57,7 +57,7 @@ export const commentDiary = (comment) => {
     return dispatch => {
         request.post(`/api/comment`,comment)
             .then(result => {
-                if (result.status === StatusCode.OK) {
+                if (result.status === StatusCode.CREATED) {
                     dispatch(getAllDiary(comment.user.id));
                 }
             });

@@ -8,18 +8,19 @@ import Comment from '../CommentInput';
 import CommentList from '../CommentList';
 import moment from 'moment';
 import ReactMarkdown from 'react-markdown';
+
 class FollowerDiaryList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {isComment: false}
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let id = this.props.match.params.id;
         this.props.getPersonalDiary(id);
     }
 
-    comment = () => {
+    comment() {
         this.setState({isComment: true})
     };
 
@@ -44,11 +45,11 @@ class FollowerDiaryList extends React.Component {
             let name = users.find(user => user.id === ele.userId).name;
             return <div key={index} style={{marginTop: 20}}>
                 <Card title={name + ' 的日志'} extra={moment(ele.time).format("YYYY-MM-DD")}>
-                    <ReactMarkdown source={ele.content} />
+                    <ReactMarkdown source={ele.content}/>
                     <Row>
                         <Col offset={16} style={{marginTop: 20}}>
                             <Button style={{marginRight: 10}} type="primary" size={'small'} ghost
-                                    onClick={this.comment}>评论日志</Button>
+                                    onClick={this.comment.bind(this)}>评论日志</Button>
                             <Button type="primary" size={'small'} ghost
                                     onClick={this.recommend.bind(this, ele.id)}>推荐优秀日志</Button>
                         </Col>
@@ -87,7 +88,7 @@ const mapDispatchToProps = (dispatch) => {
         recommend: (excellent) => {
             dispatch(excellentAction.recommend(excellent));
         },
-        comment:(comment)=>{
+        comment: (comment) => {
             dispatch(diaryAction.commentDiary(comment))
         }
     }

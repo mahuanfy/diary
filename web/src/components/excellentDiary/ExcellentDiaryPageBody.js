@@ -14,11 +14,11 @@ class ExcellentDiaryPageBody extends React.Component {
         this.state = {isComment: false}
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.getExcellentDiary();
     }
 
-    comment = () => {
+    comment() {
         this.setState({isComment: true})
     };
 
@@ -37,11 +37,11 @@ class ExcellentDiaryPageBody extends React.Component {
 
             return <div key={index} style={{marginTop: 20}}>
                 <Card title={name + ' 的日志'} extra={moment(ele.diary.time).format("YYYY-MM-DD")}>
-                    <ReactMarkdown source={ele.diary.content} />
+                    <ReactMarkdown source={ele.diary.content}/>
                     <Row>
                         <Col offset={16} style={{marginTop: 20}}>
                             <Button style={{marginRight: 10}} type="primary" size={'small'} ghost
-                                    onClick={this.comment}>评论日志</Button>
+                                    onClick={this.comment.bind(this)}>评论日志</Button>
                             {this.props.user.roleId === 2 ?
                                 <Button type="primary" size={'small'} ghost
                                         onClick={this.cancelRecommend.bind(this, ele.id)}>取消为优秀日志</Button>

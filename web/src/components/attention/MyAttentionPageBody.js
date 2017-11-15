@@ -18,7 +18,7 @@ class MyAttentionPageBody extends React.Component {
 
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.hasFollowers(this.props.user.id);
     }
 

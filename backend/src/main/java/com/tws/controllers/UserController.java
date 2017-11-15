@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(value = "用户信息相关", description = "用户信息的相关接口")
+@Api(value = "用户信息相关")
 @RestController
 @RequestMapping("/api")
 public class UserController {

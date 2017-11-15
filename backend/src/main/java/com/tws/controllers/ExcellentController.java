@@ -1,6 +1,5 @@
 package com.tws.controllers;
 
-import com.tws.constant.Constant;
 import com.tws.entities.Diary;
 import com.tws.entities.ExcellentDiary;
 import com.tws.repositories.DiaryRepository;
@@ -12,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Api(value = "优秀日志", description = "优秀日志相关接口")
+@Api(value = "优秀日志")
 @RestController
 @RequestMapping("/api")
 public class ExcellentController {
@@ -33,7 +32,7 @@ public class ExcellentController {
     @DeleteMapping("/excellentDiary/{id}")
     public ResponseEntity deleteExcellentDiaries(@PathVariable("id") long id) {
         excellentDiaryRepository.deleteByExcellentId(id);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
     }
 
     @ApiOperation(value = "添加优秀日志")
@@ -46,7 +45,7 @@ public class ExcellentController {
             excellentDiaryRepository.save(excellentDiary);
         }
 
-        return new ResponseEntity<>(excellentDiary, HttpStatus.OK);
+        return new ResponseEntity<>(excellentDiary, HttpStatus.CREATED);
     }
 
 }

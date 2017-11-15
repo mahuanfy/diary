@@ -1,6 +1,5 @@
 import * as request from '../request/request'
 import * as StatusCode from '../constants/StatusCode';
-import * as  userActions from './diary';
 
 const login = (user) => {
     return {

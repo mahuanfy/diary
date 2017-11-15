@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Api(value = "我的关注",description = "我的关注相关接口")
+@Api(value = "我的关注")
 @RestController
 @RequestMapping("/api")
 public class FollowerController {
@@ -53,7 +53,7 @@ public class FollowerController {
     @PostMapping("/follower")
     public ResponseEntity follow(@RequestBody Follow follow) {
         followerRepository.save(follow);
-        return new ResponseEntity<>(follow, HttpStatus.OK);
+        return new ResponseEntity<>(follow, HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "根据用户关注id删除该关注用户")
@@ -61,6 +61,6 @@ public class FollowerController {
     public ResponseEntity unfollow(@PathVariable("userId") Long userId, @PathVariable("followerId") Long followerId) {
         followerRepository.deleteFollow(userId, followerId);
 
-        return new ResponseEntity<>(userId, HttpStatus.OK);
+        return new ResponseEntity<>(userId, HttpStatus.NO_CONTENT);
     }
 }

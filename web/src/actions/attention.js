@@ -24,7 +24,7 @@ export const follow = (follow) => {
     return dispatch => {
         request.post(`/api/follower`, follow)
             .then(result => {
-                if (result.status === StatusCode.OK) {
+                if (result.status === StatusCode.CREATED) {
                     message.info('关注成功');
                     dispatch(getAllFollowers(follow.userId));
                 }
@@ -34,9 +34,9 @@ export const follow = (follow) => {
 
 export const unfollow = (follow) => {
     return dispatch => {
-        request._delete(`/api/follower/${follow.userId}/${follow.followerId}`)
+        request.del(`/api/follower/${follow.userId}/${follow.followerId}`)
             .then(result => {
-                if (result.status === StatusCode.OK) {
+                if (result.status === StatusCode.NO_CONTENT) {
                     message.info('取消关注成功');
                     dispatch(getAllFollowers(follow.userId));
                 }

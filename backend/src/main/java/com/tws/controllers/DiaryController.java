@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(value = "日志相关",description = "成长日志相关的接口")
+@Api(value = "日志相关")
 @RestController
 @RequestMapping("/api")
 public class DiaryController {
@@ -25,12 +25,13 @@ public class DiaryController {
     @ApiOperation(value = "添加一个成长日志")
     @PostMapping("/diary")
     public ResponseEntity addDiary(@RequestBody Diary diary) {
-        return new ResponseEntity<>(diaryRepository.save(diary), HttpStatus.OK);
+        return new ResponseEntity<>(diaryRepository.save(diary), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "根据用户id查找该用户的所有成长日志")
     @GetMapping("/diaries/{userId}")
     public ResponseEntity diaries(@PathVariable("userId") Long userId) {
+
         List<Diary> diaries = diaryRepository.findByUserIdOrderByTimeDesc(userId);
 
         return new ResponseEntity<>(diaries, HttpStatus.OK);
@@ -43,9 +44,9 @@ public class DiaryController {
             commentRepository.deleteByDiaryId(diaryId);
             diaryRepository.delete(diaryId);
 
-            return new ResponseEntity<>(diaryId, HttpStatus.OK);
-        } else {
             return new ResponseEntity<>(diaryId, HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(diaryId, HttpStatus.NOT_FOUND);
         }
 
     }
@@ -59,8 +60,8 @@ public class DiaryController {
             oldDiary.setTime(diary.getTime());
 
             diary = diaryRepository.save(oldDiary);
-            return new ResponseEntity<>(diary, HttpStatus.OK);
+            return new ResponseEntity<>(diary, HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(diary, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(diary, HttpStatus.NOT_FOUND);
     }
 }

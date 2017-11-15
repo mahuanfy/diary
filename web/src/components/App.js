@@ -20,7 +20,7 @@ class App extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         // this.props.login(student);
         this.props.login(tutor);
         this.props.getAllUser();

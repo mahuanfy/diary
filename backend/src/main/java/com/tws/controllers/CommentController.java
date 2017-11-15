@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Api(value = "日志评论相关",description = "日志评论的相关接口")
+@Api(value = "日志评论相关")
 @RestController
 @RequestMapping("/api")
 public class CommentController {
@@ -34,6 +34,6 @@ public class CommentController {
 
         diaryRepository.save(diary);
 
-        return new ResponseEntity<>(comment, HttpStatus.OK);
+        return new ResponseEntity<>(comment, HttpStatus.CREATED);
     }
 }

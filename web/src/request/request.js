@@ -38,7 +38,7 @@ export const post = (url, data) => {
 };
 
 
-export const _delete = (url) => {
+export const del = (url) => {
     return fetch(url, {
         method: "DELETE",
         headers: new Headers({
@@ -48,7 +48,7 @@ export const _delete = (url) => {
         )
     }).then(response => {
         status = response.status;
-        return response ? response.json() : "";
+        return response;
     }).then(json => {
         return {data: json, status}
     }).catch((err) => {

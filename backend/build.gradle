@@ -9,21 +9,12 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
-        classpath 'org.springframework:springloaded:1.2.4.RELEASE'
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'spring-boot'
 //apply plugin: 'war'
-apply plugin: 'idea'
-idea {
-    module {
-        inheritOutputDirs = false
-        outputDir = file("$buildDir/classes/main/")
-        testOutputDir = file("$buildDir/classes/test/")
-    }
-}
 
 
 repositories {
@@ -36,7 +27,6 @@ dependencies {
     compile("mysql:mysql-connector-java")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '1.4.3.RELEASE'
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.0'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.0'
     testCompile("junit:junit")

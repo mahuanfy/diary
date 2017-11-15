@@ -24,7 +24,7 @@ export const commentDiary = (comment) => {
     return dispatch => {
         request.post(`/api/comment`, comment)
             .then(result => {
-                if (result.status === StatusCode.OK) {
+                if (result.status === StatusCode.CREATED) {
                     dispatch(getAllExcellent());
                 }
             });
@@ -35,7 +35,7 @@ export const recommend = (excellent) => {
     return dispatch => {
         request.post(`/api/excellentDiary`, excellent)
             .then(result => {
-                if (result.status === StatusCode.OK) {
+                if (result.status === StatusCode.CREATED) {
                     message.success("推荐成功");
                 }
             });
@@ -44,9 +44,9 @@ export const recommend = (excellent) => {
 
 export const deleteDiary = (id) => {
     return dispatch => {
-        request._delete(`/api/excellentDiary/${id}`)
+        request.del(`/api/excellentDiary/${id}`)
             .then(result => {
-                if (result.status === StatusCode.OK) {
+                if (result.status === StatusCode.NO_CONTENT) {
                     dispatch(getAllExcellent());
                     message.success("取消推荐成功");
                 }
