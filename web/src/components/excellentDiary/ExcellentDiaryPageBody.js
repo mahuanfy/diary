@@ -45,9 +45,11 @@ class ExcellentDiaryPageBody extends React.Component {
                         <Col offset={16} style={{marginTop: 20}}>
                             <Button style={{marginRight: 10}} type="primary" size={'small'} ghost
                                     onClick={this.comment}>评论日志</Button>
-                            <Button type="primary" size={'small'} ghost
-                                    onClick={this.cancelRecommend.bind(this, ele.id)}>取消为优秀日志</Button>;
-
+                            {this.props.user.roleId === 2 ?
+                                <Button type="primary" size={'small'} ghost
+                                        onClick={this.cancelRecommend.bind(this, ele.id)}>取消为优秀日志</Button>
+                                :""
+                            }
                         </Col>
                     </Row>
 
@@ -70,6 +72,7 @@ class ExcellentDiaryPageBody extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        user: state.Login.login,
         users: state.Login.users,
         excellentDiaries: state.ExcellentDiary
     }
