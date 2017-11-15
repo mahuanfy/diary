@@ -28,23 +28,14 @@ class ExcellentDiaryPageBody extends React.Component {
         this.setState({isComment: false})
     }
 
-    cancelRecommendOrRecommend(id, oper) {
-        oper === "cancel" ?
-            this.props.deleteExcellent(id) :
-            "";
+    cancelRecommend(id) {
+        this.props.deleteExcellent(id);
     }
 
     render() {
         const users = this.props.users;
         const excellent = this.props.excellentDiaries.map((ele, index) => {
             let name = users.find(user => user.id === ele.diary.userId).name;
-            let recommend = this.props.isRecommend ?
-                <Button type="primary" size={'small'} ghost
-                        onClick={this.cancelRecommendOrRecommend.bind(this, ele.id, "recommend")}>推荐优秀日志</Button>
-                :
-                <Button type="primary" size={'small'} ghost
-                        onClick={this.cancelRecommendOrRecommend.bind(this, ele.id, "cancel")}>取消为优秀日志</Button>;
-
 
             return <div key={index} style={{marginTop: 20}}>
                 <Card title={name + ' 的日志'} extra={moment(ele.diary.time).format("YYYY-MM-DD")}>
@@ -54,7 +45,9 @@ class ExcellentDiaryPageBody extends React.Component {
                         <Col offset={16} style={{marginTop: 20}}>
                             <Button style={{marginRight: 10}} type="primary" size={'small'} ghost
                                     onClick={this.comment}>评论日志</Button>
-                            {recommend}
+                            <Button type="primary" size={'small'} ghost
+                                    onClick={this.cancelRecommend.bind(this, ele.id)}>取消为优秀日志</Button>;
+
                         </Col>
                     </Row>
 
@@ -90,7 +83,7 @@ const mapDispatchToProps = (dispatch) => {
         comment: (comment) => {
             dispatch(excellentActions.commentDiary(comment))
         },
-        deleteExcellent:(id)=>{
+        deleteExcellent: (id) => {
             dispatch(excellentActions.deleteDiary(id))
         }
     }

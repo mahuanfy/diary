@@ -45,7 +45,7 @@ class App extends Component {
                                     <Link to={'/diary'}><span><Icon type="edit"/> 我的日志</span></Link>
                                 </Menu.Item>
                                 <Menu.Item key="2"><Link to={'/attention'}><span><Icon type="team"/> 我的关注</span></Link></Menu.Item>
-                                <Menu.Item key="3"><Link to={'./excellent-diary'}><span><Icon
+                                <Menu.Item key="3"><Link to={'/excellent-diary'}><span><Icon
                                     type="like-o"/> 优秀日志</span></Link></Menu.Item>
                             </Menu>
                         </Sider>

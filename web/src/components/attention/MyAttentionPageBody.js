@@ -86,7 +86,7 @@ class MyAttentionPageBody extends React.Component {
                     </div>
                 </Col>
             </Row>
-            <AttentionList followersDiaries={this.props.followersDiaries}/>
+            <AttentionList history={this.props.history} followersDiaries={this.props.followersDiaries}/>
         </div>
     }
 }

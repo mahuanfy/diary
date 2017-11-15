@@ -14,4 +14,5 @@ public interface ExcellentDiaryRepository extends CrudRepository<ExcellentDiary,
     @Query("delete from ExcellentDiary where id=?1")
     void deleteByExcellentId(long id);
 
+    ExcellentDiary findByDiaryId(long id);
 }

@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
 
     @Autowired
-    private CommentRepository commentRepository;
-    @Autowired
     private UserRepository userRepository;
     @Autowired
     private DiaryRepository diaryRepository;
