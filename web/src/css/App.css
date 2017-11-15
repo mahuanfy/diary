@@ -14,6 +14,7 @@ a, a:hover {
     height: 220px;
     border: solid 1px #e9e9e9;
 }
+.ant-input-affix-wrapper .ant-input-suffix{right: 0}
 
 .attention-name {
     margin: 30px auto;

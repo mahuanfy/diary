@@ -7,8 +7,6 @@ import {withRouter} from 'react-router-dom';
 import * as followerAction from "../../actions/attention";
 
 const Option = AutoComplete.Option;
-
-
 const Search = Input.Search;
 
 class MyAttentionPageBody extends React.Component {
@@ -25,6 +23,7 @@ class MyAttentionPageBody extends React.Component {
     }
 
     followOrCancel(followerId, oper) {
+        this.setState({dataSource: []});
         oper === "follow" ? this.props.follow({userId: this.props.user.id, followerId})
             : this.props.unfollow({userId: this.props.user.id, followerId});
     }
@@ -86,7 +85,7 @@ class MyAttentionPageBody extends React.Component {
                     </div>
                 </Col>
             </Row>
-            <AttentionList history={this.props.history} followersDiaries={this.props.followersDiaries}/>
+            <AttentionList followersDiaries={this.props.followersDiaries}/>
         </div>
     }
 }

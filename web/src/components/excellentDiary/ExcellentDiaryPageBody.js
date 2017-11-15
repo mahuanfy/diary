@@ -41,7 +41,6 @@ class ExcellentDiaryPageBody extends React.Component {
                 <Card title={name + ' 的日志'} extra={moment(ele.diary.time).format("YYYY-MM-DD")}>
                     <p>{ele.diary.content}</p>
                     <Row>
-                        <Col span={3}>查看全文</Col>
                         <Col offset={16} style={{marginTop: 20}}>
                             <Button style={{marginRight: 10}} type="primary" size={'small'} ghost
                                     onClick={this.comment}>评论日志</Button>
